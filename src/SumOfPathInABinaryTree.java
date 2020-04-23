@@ -14,6 +14,7 @@ public class SumOfPathInABinaryTree {
     public static List<List<Integer>> ans = new ArrayList<>();
     public static List<List<Integer>> pathSum(TreeNode root, int sum) {
         List<Integer> path = new ArrayList<>();
+        if(root==null) return ans;
         path.add(root.val);
         if (root.left!=null) {
             path.add(root.left.val);
@@ -24,6 +25,12 @@ public class SumOfPathInABinaryTree {
             path.add(root.right.val);
             Search(root.right,root.val+root.right.val,sum,path);
             path.remove(path.size()-1);
+        }
+        if (root.left==null&&root.right==null){
+            if(root.val==sum){
+                path.add(root.val);
+                ans.add(path);
+            }
         }
         path.remove(path.size()-1);
         return ans;
