@@ -1,3 +1,5 @@
+package Finished;
+
 public class Merge2SortedLinks {
     /**合并两个有序链表
      * 执行用时 :1 ms, 在所有 Java 提交中击败了72.03%的用户

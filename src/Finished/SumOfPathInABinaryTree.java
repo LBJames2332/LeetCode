@@ -1,3 +1,5 @@
+package Finished;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +34,7 @@ public class SumOfPathInABinaryTree {
                 ans.add(path);
             }
         }
+
         path.remove(path.size()-1);
         return ans;
     }

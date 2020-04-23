@@ -1,3 +1,5 @@
+package Finished;
+
 public class NumOfIands {
     /**计算网格中岛屿的数量
      * 执行用时 :104 ms, 在所有 Java 提交中击败了5.38%的用户

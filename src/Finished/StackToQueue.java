@@ -1,3 +1,5 @@
+package Finished;
+
 import java.util.Stack;
 
 /**实现一个MyQueue类，该类用两个栈来实现一个队列。

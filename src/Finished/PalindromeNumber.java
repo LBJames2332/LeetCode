@@ -1,3 +1,5 @@
+package Finished;
+
 public class PalindromeNumber {
     /**
      * 执行用时 :19 ms, 在所有 Java 提交中击败了10.00%的用户

@@ -1,3 +1,5 @@
+package Finished;
+
 public class PalindromeLink {
     /**回文链表
      * 执行用时 :1 ms, 在所有 Java 提交中击败了99.82%的用户

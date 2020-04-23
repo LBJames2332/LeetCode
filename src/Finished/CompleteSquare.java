@@ -1,3 +1,5 @@
+package Finished;
+
 import java.util.Scanner;
 
 public class CompleteSquare {
