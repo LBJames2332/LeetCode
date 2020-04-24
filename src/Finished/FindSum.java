@@ -27,14 +27,6 @@ public class FindSum {
                 map.put(nums[i],l);
             }
         }
-//        for(Map.Entry<Integer, List<Integer> >a:map.entrySet()){
-//
-//            System.out.print(a.getKey()+":");
-//            for (Integer i:a.getValue()){
-//                System.out.print(i+" ");
-//            }
-//            System.out.println();
-//        }
         for (int i = 0; i < nums.length; i++) {
             System.out.println(nums[i]+" "+i);
             if (map.containsKey(target-nums[i])) {
@@ -48,6 +40,48 @@ public class FindSum {
                 } else {
                     returnArray[0] = i;
                     returnArray[1] = map.get(nums[i]).get(0);
+                    return returnArray;
+                }
+            }
+        }
+        return null;
+
+    }
+
+    /**
+     * 执行用时 :5 ms, 在所有 Java 提交中击败了57.86%的用户
+     * 内存消耗 :39.8 MB, 在所有 Java 提交中击败了5.06%
+     * 的用户
+     * @param nums
+     * @param target
+     * @return
+     */
+    public static  int[] twoSum2(int[] nums, int target) {
+        Map<Integer, int[]> map = new HashMap<>();
+        //Map<Integer,Integer> markmap = new HashMap<>();
+        int[] returnArray = new int[2];
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(nums[i])){
+                map.get(nums[i])[1] = i;
+            }
+            else {
+                int[] arr = new int[]{-1,-1};
+                arr[0] = i;
+                map.put(nums[i],arr);
+            }
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(target-nums[i])) {
+                if (nums[i] * 2 == target) {
+                    if (map.get(nums[i])[1] != -1) {
+                        returnArray[0] = map.get(nums[i])[0];
+                        returnArray[1] = map.get(nums[i])[1];
+                        return returnArray;
+                    }
+
+                } else {
+                    returnArray[0] = i;
+                    returnArray[1] = map.get(target-nums[i])[0];
                     return returnArray;
                 }
             }
