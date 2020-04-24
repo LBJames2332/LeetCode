@@ -1,4 +1,4 @@
-package NotFinished;
+package Finished;
 
 public class LongestContinuousIncreasingSubsequence {
     /**
