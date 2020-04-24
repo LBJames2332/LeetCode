@@ -2,6 +2,9 @@ package NotFinished;
 
 import java.util.*;
 
+/**
+ * 数字n代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且有效的括号组合
+ */
 public class MostValidBrackets {
     public static void main(String[] args) {
         Map<Integer,Integer> map = new HashMap<>();
