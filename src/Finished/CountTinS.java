@@ -1,6 +1,10 @@
 package Finished;
 
 public class CountTinS {
+    public static void main(String[] args) {
+        CountTinS countTinS =new CountTinS();
+        System.out.println(countTinS.numDistinct("rabbbit","rabbit"));
+    }
     /**
      * 给定一个字符串 S 和一个字符串 T，计算在 S 的子序列中 T 出现的个数。
      * 一个字符串的一个子序列是指，通过删除一些（也可以不删除）字符且不干扰剩余字符相对位置所组成的新字符串。（例如，"ACE" 是 "ABCDE" 的一个子序列，而 "AEC" 不是）
@@ -41,37 +45,79 @@ public class CountTinS {
 //        }
 //    }
 
+//    /**
+//     * 二维数组dp法
+//     * dp[i][j]表示的是：s的前j个字符中包含t的前i个字符为子序列的个数
+//     * 有两种情况：1.若是s的第j个字符≠t的第i个字符那么s的第j个字符没有参与的价值，dp[i][j]就为dp[i][j-1]
+//     *           2.若是s的第j个字符＝t的第i个字符，那么有两种
+//     *                   a.s的前j-1个字符已经有dp[i][j-i]个以t的前i个字符为子序列的情况，则无需第j个字符的情况数为dp[i][j-1]
+//     *                   b.s的前j-1个字符有dp[i-1][j-1]和以t的前i-1个字符为子序列的情况，这些情况在s的第j个字符和t的第i个字符参与进来的情
+//     *                   况下都可以成为新的复合的情况
+//     * 执行用时 :5 ms, 在所有 Java 提交中击败了90.36%的用户
+//     * 内存消耗 :39.7 MB, 在所有 Java 提交中击败了12.50%的用户
+//     * @param s
+//     * @param t
+//     * @return
+//     */
+//    public int numDistinct(String s, String t) {
+//        if (s.length()<t.length()) return 0;
+//        char[] char_s = s.toCharArray();
+//        char[] char_t = t.toCharArray();
+//        int[][] dp = new int[t.length()+1][s.length()+1];
+//        for (int i = 1; i <= s.length(); i++) {
+//            dp[0][i] = 1;
+//        }
+//        for (int i = 1; i <= t.length(); i++) {
+//            for (int j = i; j <= s.length(); j++) {
+//                if (char_s[j]==char_t[i]){
+//                    dp[i][j] = dp[i][j-1] + dp[i-1][j-1];
+//                }
+//                else dp[i][j] = dp[i][j-1];
+//            }
+//        }
+//        return dp[char_t.length][char_s.length];
+//
+//    }
     /**
-     * 二维数组dp法
-     * dp[i][j]表示的是：s的前j个字符中包含t的前i个字符为子序列的个数
-     * 有两种情况：1.若是s的第j个字符≠t的第i个字符那么s的第j个字符没有参与的价值，dp[i][j]就为dp[i][j-1]
-     *           2.若是s的第j个字符＝t的第i个字符，那么有两种
-     *                   a.s的前j-1个字符已经有dp[i][j-i]个以t的前i个字符为子序列的情况，则无需第j个字符的情况数为dp[i][j-1]
-     *                   b.s的前j-1个字符有dp[i-1][j-1]和以t的前i-1个字符为子序列的情况，这些情况在s的第j个字符和t的第i个字符参与进来的情
-     *                   况下都可以成为新的复合的情况
-     * 执行用时 :5 ms, 在所有 Java 提交中击败了90.36%的用户
-     * 内存消耗 :39.7 MB, 在所有 Java 提交中击败了12.50%的用户
+     * 一维数组dp法
+     *
+     * 执行用时 :4 ms, 在所有 Java 提交中击败了95.86%的用户
+     * 内存消耗 :38 MB, 在所有 Java 提交中击败了12.50%的用户
      * @param s
      * @param t
      * @return
      */
     public int numDistinct(String s, String t) {
         if (s.length()<t.length()) return 0;
+        int left;
+        int left_top;
         char[] char_s = s.toCharArray();
         char[] char_t = t.toCharArray();
-        int[][] dp = new int[t.length()+1][s.length()+1];
-        for (int i = 1; i <= s.length(); i++) {
-            dp[0][i] = 1;
+        int[] dp = new int[s.length()+1];
+        for (int i = 0; i <= s.length(); i++) {
+            dp[i] = 1;
         }
+        int help;
         for (int i = 1; i <= t.length(); i++) {
+            left = 0;
+            left_top = dp[i-1];
             for (int j = i; j <= s.length(); j++) {
-                if (char_s[j]==char_t[i]){
-                    dp[i][j] = dp[i][j-1] + dp[i-1][j-1];
+                if (char_s[j-1]==char_t[i-1]){
+                    help =dp[j];
+
+                    dp[j] = left+left_top;
+                    left_top = help;
+                    left = dp[j];
                 }
-                else dp[i][j] = dp[i][j-1];
+                else {
+                    help =dp[j];
+
+                    dp[j] = left;
+                    left_top = help;
+                }
             }
         }
-        return dp[char_t.length][char_s.length];
+        return dp[dp.length-1];
 
     }
 }
