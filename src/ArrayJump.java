@@ -1,5 +1,5 @@
 public class ArrayJump {
-    /**
+    /**DP法
      * 执行用时 :600 ms, 在所有 Java 提交中击败了5.01%的用户
      * 内存消耗 :41 MB, 在所有 Java 提交中击败了5.00%的用户
      * @param nums
@@ -18,6 +18,24 @@ public class ArrayJump {
         return n_jump[n_jump.length-1];
     }
 
+    /**
+     * Greedy
+     * @param nums
+     * @return
+     */
+    public int jump2(int[] nums) {
+        int step = 0;
+        int end = 0;
+        int max_position = 0;
+        for (int i = 0; i < nums.length - 1; i++) {
+            max_position = (max_position>(nums[i]+i))?max_position:(nums[i]+i);
+            if (i == end){
+                step++;
+                end = max_position;
+            }
+        }
+        return step;
+    }
     public static void main(String[] args) {
         ArrayJump arrayJump = new ArrayJump();
         System.out.println(arrayJump.jump(new int[]{2,3,1,1,4}));
