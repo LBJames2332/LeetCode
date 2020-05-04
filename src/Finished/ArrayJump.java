@@ -1,3 +1,5 @@
+package Finished;
+
 public class ArrayJump {
     /**DP法
      * 执行用时 :600 ms, 在所有 Java 提交中击败了5.01%的用户
