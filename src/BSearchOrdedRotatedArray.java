@@ -1,6 +1,5 @@
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class BSearchOrdedRotatedArray {
     private static boolean find = false;
@@ -17,9 +16,6 @@ public class BSearchOrdedRotatedArray {
         System.out.println(bSearchOrdedRotatedArray.search(new int[]{1,3,5},5));
     }
     public int search(int[] nums, int target) {
-
-        ConcurrentHashMap<Integer,Integer> concurrentHashMap = new ConcurrentHashMap<>();
-        concurrentHashMap.put(1,2);
         if(nums.length==0) return -1;
         return BinarySearch(nums,0,nums.length-1,target);
     }
