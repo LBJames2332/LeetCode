@@ -59,7 +59,8 @@ public class MostValidBrackets {
         return l_s;
     }*/
     static int[] record = new int[2];
-    static Stack<Character> stack = new Stack<>();
+
+    static java.util.Stack<Character> stack = new java.util.Stack<>();
     static StringBuffer str_buffer = new StringBuffer();
     static List<String> ANS = new ArrayList<>();
 

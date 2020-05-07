@@ -1,7 +1,9 @@
 package Finished;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class SubSet {
     /**
@@ -16,7 +18,9 @@ public class SubSet {
     public static List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> output = new ArrayList();
         int n = nums.length;
-
+        Set<Integer> s = new HashSet<>();
+        s.add(1);
+        if (s.contains(1));
         for (int i = (int)Math.pow(2, n); i < (int)Math.pow(2, n + 1); ++i) {
             String bitmask = Integer.toBinaryString(i).substring(1);
             List<Integer> curr = new ArrayList();

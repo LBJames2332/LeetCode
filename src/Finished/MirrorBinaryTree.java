@@ -7,8 +7,8 @@ public class MirrorBinaryTree {
      * 执行用时 :1 ms, 在所有 Java 提交中击败了33.97%的用户
      * 内存消耗 :37.8 MB, 在所有 Java 提交中击败了100.00%的用户
      */
-    Stack<TreeNode2> stack_tree = new Stack<>();
-    public boolean isSymmetric(TreeNode2 root) {
+    Stack<TreeNode4> stack_tree = new Stack<>();
+    public boolean isSymmetric(TreeNode4 root) {
         if (root.right!=null&&root.left!=null){
             if (root.right.val==root.left.val){
                 stack_tree.add(root.left);
@@ -24,8 +24,8 @@ public class MirrorBinaryTree {
         return true;
     }
     private boolean Loop_Judge() {
-        TreeNode2 node1;
-        TreeNode2 node2;
+        TreeNode4 node1;
+        TreeNode4 node2;
         while (!stack_tree.empty()){
             node1 = stack_tree.pop();
             node2 = stack_tree.pop();
@@ -59,7 +59,7 @@ public class MirrorBinaryTree {
 }
 class TreeNode2 {
     int val;
-    TreeNode2 left;
-    TreeNode2 right;
+    TreeNode4 left;
+    TreeNode4 right;
     TreeNode2(int x) { val = x; }
 }
