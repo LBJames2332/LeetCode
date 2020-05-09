@@ -39,7 +39,7 @@ public class LongestWaveSS {
      * @param nums
      * @return
      */
-    public int wiggleMaxLength(int[] nums) {
+    public int wiggleMaxLength_LDP(int[] nums) {
         int length = nums.length;
         if (length == 0) return 0;
         int[] dp_i = new int[length];
@@ -65,6 +65,28 @@ public class LongestWaveSS {
         return Math.max(dp_d[length - 1],dp_i[length - 1]);
     }
 
+    /**
+     * 执行用时 :0 ms, 在所有 Java 提交中击败了100.00%的用户
+     * 内存消耗 :36.9 MB, 在所有 Java 提交中击败了14.29%的用户
+     * O(1)space linerDP
+     * @param nums
+     * @return
+     */
+    public int wiggleMaxLength(int[] nums) {
+        int length = nums.length;
+        if (length == 0) return 0;
+        int down = 1;
+        int up = 1;
+        for (int i = 1; i < length; i++) {
+            if (nums[i] < nums[i - 1]){
+                down = up+1;
+            }
+            else if (nums[i] > nums[i - 1]){
+                up = down + 1;
+            }
+        }
+        return Math.max(down,up);
+    }
 
     public static void main(String[] args) {
         LongestWaveSS longestWaveSS = new LongestWaveSS();
