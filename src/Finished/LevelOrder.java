@@ -7,6 +7,13 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class LevelOrder {
     List<List<Integer>> Ans = new ArrayList<>();
+
+    /**
+     * 执行用时 :6 ms, 在所有 Java 提交中击败了22.74%的用户
+     * 内存消耗 :39.7 MB, 在所有 Java 提交中击败了5.71%的用户
+     * @param root
+     * @return
+     */
     public List<List<Integer>> levelOrder(TreeNode root) {
         if(root == null) return Ans;
         Queue<TreeNode>[] queue_List = new LinkedBlockingQueue[2];
