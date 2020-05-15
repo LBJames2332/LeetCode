@@ -254,7 +254,40 @@ public class SquareOfTheBiggestGrid {
             this.y = y;
         }
     }
+    static int l_square = 0;
+    boolean[][] marked;
 
+    /**
+     * 执行用时 :3 ms, 在所有 Java 提交中击败了70.51%的用户
+     * 内存消耗 :40.2 MB, 在所有 Java 提交中击败了91.67%的用户
+     * @param grid
+     * @return
+     */
+    public int maxAreaOfIsland_BFS(int[][] grid) {
+        marked = new boolean[grid.length][grid[0].length];
+        int max = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j]==1&&marked[i][j]==false){
+                    l_square = 0;
+                    Test(grid,i,j);
+                    max = Math.max(max,l_square);
+                }
+            }
+        }
+        return max;
+    }
+
+    private void Test(int[][] grid, int i, int j) {
+        if (i < 0||i >= grid.length||j<0||j >= grid[0].length||grid[i][j]==0||marked[i][j]==true) return;
+        l_square++;
+        marked[i][j] = true;
+        Test(grid,i-1,j);
+        Test(grid,i+1,j);
+        Test(grid,i,j-1);
+        Test(grid,i,j+1);
+
+    }
 
     public static void main(String[] args) {
         SquareOfTheBiggestGrid squareOfTheBiggestGrid = new SquareOfTheBiggestGrid();
