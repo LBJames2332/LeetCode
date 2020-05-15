@@ -1,3 +1,5 @@
+package Finished;
+
 public class LongestWaveSS {
     /**
      * 执行用时 :6 ms, 在所有 Java 提交中击败了13.25%的用户
