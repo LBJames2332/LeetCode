@@ -1,7 +1,9 @@
 package Finished;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SumOfRoad {
     /**
@@ -67,6 +69,45 @@ public class SumOfRoad {
                 ll.remove(ll.size()-1);
             }
         }
+    }
+
+    /**
+     * 给定一个二叉树，它的每个结点都存放着一个整数值。找出路径和等于给定数值的路径总数。
+     * 路径 “不需要从根节点开始，也不需要在叶子节点结束” ，但是路径方向必须是向下的（只能从父节点到子节点）。
+     * 链接：https://leetcode-cn.com/problems/path-sum-iii
+     * @param root
+     * @param sum
+     * @return
+     */
+    int count = 0;
+    Map<Integer,Integer> map = new HashMap<>();
+    public int pathSum3(TreeNode root, int sum) {
+        if (root==null) return count;
+        map.put(0,1);
+        count += map.getOrDefault(root.val-sum,0);
+        map.put(root.val,map.getOrDefault(root.val,0)+1);
+        Search(root,root.val,sum);
+        return count;
+    }
+
+    private void Search3(TreeNode root, int i, int sum) {
+
+        if (root==null) return;
+
+
+        if (root.left!=null) {
+            count += map.getOrDefault(i+root.left.val-sum,0);
+            map.put(i+root.left.val,map.getOrDefault(i+root.left.val,0)+1);
+            Search(root.left,i+root.left.val,sum);
+            map.put(i+root.left.val,map.get(i+root.left.val) - 1);
+        }
+        if (root.right!=null) {
+            count += map.getOrDefault(i+root.right.val-sum,0);
+            map.put(i+root.right.val,map.getOrDefault(i+root.right.val,0)+1);
+            Search(root.right,i+root.right.val,sum);
+            map.put(i+root.right.val,map.get(i+root.right.val) - 1);
+        }
+
     }
     class TreeNode{
         int val;
