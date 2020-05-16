@@ -30,6 +30,6 @@ public class ValidBracket {
                     break;
             }
         }
-        return true;
+        return stack.size()==0?true:false;
     }
 }
