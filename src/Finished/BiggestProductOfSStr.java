@@ -1,3 +1,5 @@
+package Finished;
+
 public class BiggestProductOfSStr {
     //连续子串的最大乘积
 
