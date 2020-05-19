@@ -1,17 +1,12 @@
 package Valuable_for_Practise;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class BiggestSpecialString {
-    class Struct{
-        int start;
-        int end;
 
-        public Struct(int start, int end) {
-            this.start = start;
-            this.end = end;
-        }
-    }
 
     /**
      * 执行用时 :2 ms, 在所有 Java 提交中击败了100.00%的用户
@@ -44,7 +39,6 @@ public class BiggestSpecialString {
         if (chars.length<3) return false;
         byte count = 0;
         byte fact_head = 0;
-        Stack<Struct> s  = new Stack<>();
         List<char[]> list = new ArrayList<>();
         for (byte i = 0; i < chars.length; i++) {
 
@@ -113,6 +107,89 @@ public class BiggestSpecialString {
 
         return true;
     }
+
+    /**
+     * 执行用时 :1 ms, 在所有 Java 提交中击败了100.00%的用户
+     * 内存消耗 :37.8 MB, 在所有 Java 提交中击败了50.00%的用户
+     * @param S
+     * @return
+     */
+    public String makeLargestSpecial3(String S) {
+        if (S.length()==2) return S;
+        char[] char_S = S.toCharArray();
+        innerSort2(char_S);
+
+
+
+
+        return String.valueOf(char_S);
+    }
+
+    /**
+     *
+     * @param chars father内部的一个待排序的字符数组
+     * @return 返回true：有可能有调整
+     *             false：必然没有调整(避免不必要的更新数据)
+     */
+
+    public void innerSort2(char[] chars){
+        if (chars.length<5) return;
+        byte count = 0;
+        byte fact_head = 0;
+        List<char[]> list = new ArrayList<>();
+        for (byte i = 0; i < chars.length; i++) {
+
+            count = (byte) (count + ((chars[i]=='1')?1:-1));
+            if (count == 0){
+                /**
+                 * 找到1个
+                 * 对其内进行排序
+                 * 出来再排序
+                 * 用comparator的方法（**）
+                 */
+                char[] newchar = new char[i - fact_head-1];
+
+                for (byte j = (byte) (fact_head+1); j < i; j++) {
+                    newchar[j-fact_head-1] = chars[j];
+                }
+                //TODO check
+
+                innerSort2(newchar);
+                list.add(newchar);
+                fact_head = (byte) (i+1);
+
+            }
+        }
+        list.sort(new Comparator<char[]>() {
+            @Override
+            public int compare(char[] o1, char[] o2) {
+                byte length = (byte) ((o1.length>o2.length)?o2.length:o1.length);
+                for (byte i = 0; i < length; i++) {
+                    if (o1[i]!=o2[i]){
+                        //谁先有一个1，则把它放到前面收益更高
+                        return (o1[i]=='1')?-1:1;
+                    }
+                }
+                //最后有隐藏的‘0’
+                return o1.length>length?-1:1;
+                //若o2短，而o2与o1的前面一段都完全一样，显然，o1不满足最小特殊子串的定义，不存在
+                //反之亦然
+                //所以走到这儿说明二者完全相同，随意返回正负。
+            }
+        });
+        int start = 0;
+        for (char[] cs:list){
+            chars[start++] = '1';
+            for (char c:cs){
+                chars[start++]= c;
+            }
+            chars[start++] = '0';
+        }
+
+
+        return;
+    }
+
     public String makeLargestSpecial2(String S) {
         int count = 0;
         int start = 0;
@@ -133,6 +210,6 @@ public class BiggestSpecialString {
 
     public static void main(String[] args) {
         BiggestSpecialString biggestSpecialString = new BiggestSpecialString();
-        System.out.println(biggestSpecialString.makeLargestSpecial("11011000"));
+        System.out.println(biggestSpecialString.makeLargestSpecial3("11011000"));
     }
 }
