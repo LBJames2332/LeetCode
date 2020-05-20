@@ -1,5 +1,8 @@
 package Finished;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LongestSStrWith2nVowel {
 
     /**
@@ -23,10 +26,50 @@ public class LongestSStrWith2nVowel {
                 if (cur == 0) max = Math.max(max,j-i+1);
             }
         }
-        System.out.println(max);
         return max;
     }
+    //Prefix problem
 
+    /**
+     *
+     * 执行用时 :17 ms, 在所有 Java 提交中击败了77.84%的用户
+     * 内存消耗 :44.5 MB, 在所有 Java 提交中击败了100.00%的用户
+     * @param s
+     * @return
+     */
+    public int findTheLongestSubstring_Prefix(String s) {
+        int length = s.length();
+        byte[] b_s = s.getBytes();
+        byte cur = 0;
+        int max = 0;
+        int len = 0;
+        Map<Byte,Integer> map = new HashMap<>();
+        map.put((byte) 0,-1);
+        boolean mark = true;
+        for (int i = 0; i < length; i++) {
+
+            if (IsVowel(b_s[i])){
+                mark = true;
+                cur ^= b_s[i];
+                if (map.containsKey(cur)){
+                    len = i-map.get(cur);
+                    max = Math.max(max,len);
+                }
+                else {
+                    mark = false;
+                    map.put(cur,i);
+                }
+            }
+            else {
+                if (!mark){
+                    mark = true;
+                    len = 0;
+                }
+                max = Math.max(max,++len);
+            }
+        }
+        return max;
+    }
     private boolean IsVowel(byte b) {
         switch (b){
             case 105: return true;
@@ -41,6 +84,6 @@ public class LongestSStrWith2nVowel {
     public static void main(String[] args) {
         LongestSStrWith2nVowel longestSStrWith2nVowel = new LongestSStrWith2nVowel();
         System.out.println(0^'i');
-        longestSStrWith2nVowel.findTheLongestSubstring("eleetminicoworoep");
+        longestSStrWith2nVowel.findTheLongestSubstring_Prefix("id");
     }
 }
