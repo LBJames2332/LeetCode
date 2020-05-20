@@ -42,31 +42,17 @@ public class LongestSStrWith2nVowel {
         byte[] b_s = s.getBytes();
         byte cur = 0;
         int max = 0;
-        int len = 0;
+        int len;
         Map<Byte,Integer> map = new HashMap<>();
         map.put((byte) 0,-1);
-        boolean mark = true;
         for (int i = 0; i < length; i++) {
+            if (IsVowel(b_s[i]))cur ^= b_s[i];
+            if (map.containsKey(cur)){
+                len = i-map.get(cur);
+                max = Math.max(max,len);
+            }
+            else map.put(cur,i);
 
-            if (IsVowel(b_s[i])){
-                mark = true;
-                cur ^= b_s[i];
-                if (map.containsKey(cur)){
-                    len = i-map.get(cur);
-                    max = Math.max(max,len);
-                }
-                else {
-                    mark = false;
-                    map.put(cur,i);
-                }
-            }
-            else {
-                if (!mark){
-                    mark = true;
-                    len = 0;
-                }
-                max = Math.max(max,++len);
-            }
         }
         return max;
     }
@@ -84,6 +70,6 @@ public class LongestSStrWith2nVowel {
     public static void main(String[] args) {
         LongestSStrWith2nVowel longestSStrWith2nVowel = new LongestSStrWith2nVowel();
         System.out.println(0^'i');
-        longestSStrWith2nVowel.findTheLongestSubstring_Prefix("id");
+        longestSStrWith2nVowel.findTheLongestSubstring_Prefix("eleetminicoworoep");
     }
 }
