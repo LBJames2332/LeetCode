@@ -79,7 +79,7 @@ public class FindKMFNumbers {
 
     public static void main(String[] args) {
         FindKMFNumbers findKMFNumbers =new FindKMFNumbers();
-        System.out.println(Arrays.toString(findKMFNumbers.topKFrequent_withPriorityQueue(new int[]{6,0,1,4,9,7,-3,1,-4,-8,4,-7,-3,3,2,-3,9,5,-4,0},6)));
+        System.out.println(Arrays.toString(findKMFNumbers.topKFrequent_Bucket(new int[]{1},1)));
     }
     Queue<Node> heap = new PriorityQueue<>(new Comparator<Node>() {
         @Override
@@ -131,5 +131,36 @@ public class FindKMFNumbers {
         public int hashCode() {
             return Objects.hash(count, val);
         }
+    }
+
+    /**
+     * 执行用时 :17 ms, 在所有 Java 提交中击败了74.42%的用户
+     * 内存消耗 :42.2 MB, 在所有 Java 提交中击败了6.67%的用户
+     * @param nums
+     * @param k
+     * @return
+     */
+    public int[] topKFrequent_Bucket(int[] nums, int k) {
+        if (k==0) return new int[0];
+        int[] ans = new int[k];
+        int pos =0;
+        for (int i = 0; i < nums.length; i++) {
+            n_set.put(nums[i],n_set.getOrDefault(nums[i],0)+1);
+        }
+        List<Integer>[]bucket = new ArrayList[nums.length+1];
+        for (Map.Entry<Integer,Integer> entry:n_set.entrySet()){
+            if (bucket[entry.getValue()]==null) bucket[entry.getValue()] = new ArrayList<>();
+            bucket[entry.getValue()].add(entry.getKey());
+        }
+        for (int i = bucket.length-1; i > -1; i--) {
+            if (bucket[i]!=null){
+                for (int j = 0; j < bucket[i].size(); j++) {
+                    ans[pos++] = bucket[i].get(j);
+                }
+                if (pos==k) return ans;
+
+            }
+        }
+        return ans;
     }
 }
