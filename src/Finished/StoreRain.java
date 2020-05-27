@@ -27,18 +27,39 @@ public class StoreRain {
         }
         return ans;
     }
-    class Info{
-        int pos;
-        int height;
 
-        public Info(int pos, int height) {
-            this.pos = pos;
-            this.height = height;
+    /**
+     * 执行用时 :1 ms, 在所有 Java 提交中击败了99.98%的用户
+     * 内存消耗 :39 MB, 在所有 Java 提交中击败了12.86%的用户
+     * @param height
+     * @return
+     */
+    public int trap_2pointers(int[] height) {
+        int left=0;
+        int right = height.length-1;
+        int ans = 0;
+        int h;
+        while (left<right){
+            if(height[left]>height[right]){
+                h = height[right];
+                while (height[--right] < height[left]){
+                    if (height[right]>h) h = height[right];
+                    else ans+=h-height[right];
+                }
+            }
+            else {
+                h = height[left];
+                while (height[++left] < height[right]){
+                    if (height[left]>h) h = height[left];
+                    else ans+=h-height[left];
+                }
+            }
         }
+        return ans;
     }
 
     public static void main(String[] args) {
         StoreRain storeRain = new StoreRain();
-        System.out.println(storeRain.trap(new int[]{0,1,0,2,1,0,1,3,2,1,2,1}));
+        System.out.println(storeRain.trap_2pointers(new int[]{0,1,0,2,1,0,1,3,2,1,2,1}));
     }
 }
