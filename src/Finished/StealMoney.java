@@ -23,4 +23,21 @@ public class StealMoney {
         return Math.max(dp[dp.length-1],dp[dp.length-1]);
         //最后两家一定要偷一家，因为假如我最后两家一家都不偷，一定会有一家我能不触发警报的我没去偷，太可惜了。
     }
+    public int rob2(int[] nums) {
+        if (nums.length==0) return 0;
+        if (nums.length==1) return nums[0];
+        if (nums.length==2) return Math.max(nums[0],nums[1]);
+        int dp1 = nums[0];
+        int dp2 = nums[1];
+        int dp3 = nums[0]+nums[2];
+        int dp4;
+        for (int i = 3; i < nums.length; i++) {
+            dp4 = nums[i]+((dp1>dp2)?dp1:dp2);
+            dp1 = dp2;
+            dp2 = dp3;
+            dp3 = dp4;
+        }
+        return Math.max(dp2,dp3);
+        //最后两家一定要偷一家，因为假如我最后两家一家都不偷，一定会有一家我能不触发警报的我没去偷，太可惜了。
+    }
 }
