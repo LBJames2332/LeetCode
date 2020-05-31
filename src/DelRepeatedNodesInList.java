@@ -41,4 +41,33 @@ public class DelRepeatedNodesInList {
             this.val = val;
         }
     }
+
+    /**
+     * 执行用时 :1 ms, 在所有 Java 提交中击败了91.80%的用户
+     * 内存消耗 :39.4 MB, 在所有 Java 提交中击败了6.67%的用户
+     * @param head
+     * @return
+     */
+    public ListNode deleteDuplicates2(ListNode head) {
+
+        ListNode help = head;
+        ListNode return_prev = new ListNode(0);
+        return_prev.next = head;
+        ListNode help_prev = return_prev;
+        while (help!=null&&help.next!=null){
+            if (help.next.val!=help_prev.next.val){
+                help = help.next;
+                help_prev = help_prev.next;
+            }
+            else {
+                while (help.next!=null&&help.next.val==help_prev.next.val){
+
+                    help = help.next;
+                }
+                help_prev.next  = help.next;
+                help = help.next;
+            }
+        }
+        return return_prev.next;
+    }
 }
