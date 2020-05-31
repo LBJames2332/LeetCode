@@ -2,13 +2,44 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DeleteZeroList {
+
+    /**
+     * 执行用时 :2 ms, 在所有 Java 提交中击败了99.37%的用户
+     * 内存消耗 :39.8 MB, 在所有 Java 提交中击败了12.50%的用户
+     * @param head
+     * @return
+     */
+    public ListNode removeZeroSumSublists(ListNode head) {
+        Map<Integer,ListNode> map = new HashMap<>();
+
+        ListNode prev_head = new ListNode(0);
+        ListNode help = head;
+        prev_head.next = head;
+        map.put(0,prev_head);
+        int sum = 0;
+        while (help!=null){
+            sum+=help.val;
+            map.put(sum,help);
+            help = help.next;
+        }
+        help = prev_head;
+        sum = 0;
+        while (help!=null){
+            sum+=help.val;
+            if (map.get(sum)!=help){
+                help.next = map.get(sum).next;
+            }
+
+        }
+        return prev_head.next;
+    }
     /**
      * 执行用时 :5 ms, 在所有 Java 提交中击败了30.61%的用户
      * 内存消耗 :39.8 MB, 在所有 Java 提交中击败了12.50%的用户
      * @param head
      * @return
      */
-    public ListNode removeZeroSumSublists(ListNode head) {
+    public ListNode removeZeroSumSublists2(ListNode head) {
         Map<Integer,ListNode> map = new HashMap<>();
         ListNode marknode = new ListNode(0);
         marknode.next = head;
