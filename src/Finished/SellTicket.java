@@ -1,3 +1,5 @@
+package Finished;
+
 public class SellTicket {
     /**
      * 执行用时 :1 ms, 在所有 Java 提交中击败了98.81%的用户

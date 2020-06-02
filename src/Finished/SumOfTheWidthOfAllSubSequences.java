@@ -21,13 +21,13 @@ public class SumOfTheWidthOfAllSubSequences {
         for (int i = 1; i < A.length; ++i)
             pow2[i] = pow2[i-1] * 2 % MOD;
 //        Arrays.sort(A);
-//        long Sum = 0;
+//        long Finished.Sum = 0;
 //        for (int i = 0; i < A.length; i++) {
 //            for (int j = i+1; j < A.length; j++) {
-//                Sum= (long) ((Sum+(A[j]-A[i])*pow2[j-i-1])%1_000_000_007);
+//                Finished.Sum= (long) ((Finished.Sum+(A[j]-A[i])*pow2[j-i-1])%1_000_000_007);
 //            }
 //        }
-//        return (int) Sum;
+//        return (int) Finished.Sum;
 
         int N = A.length;
         Arrays.sort(A);

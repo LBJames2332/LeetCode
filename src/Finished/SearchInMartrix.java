@@ -1,3 +1,5 @@
+package Finished;
+
 public class SearchInMartrix {
     /**
      * 执行用时 :6 ms, 在所有 Java 提交中击败了99.80%的用户
