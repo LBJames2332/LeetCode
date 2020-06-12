@@ -15,4 +15,17 @@ public class Climb {
         }
         return ans[n];
     }
+
+    public int climbStairs_O1(int n) {
+        if (n<2) return 1;
+        int dp_1 = 1;
+        int dp_2 = 1;
+        int temp;
+        for (int i = 2; i <= n; i++) {
+            temp = dp_1;
+            dp_1 = dp_2;
+            dp_2 += temp;
+        }
+        return dp_2;
+    }
 }
