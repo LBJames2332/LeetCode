@@ -1,3 +1,5 @@
+package Finished;
+
 public class NumToStr {
     char[] char_s;
     int[] cont;//计算该以该位置为起点的情况个数
