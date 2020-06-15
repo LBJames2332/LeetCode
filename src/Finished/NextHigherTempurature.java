@@ -6,6 +6,12 @@ import java.util.List;
 import java.util.Stack;
 
 public class NextHigherTempurature {
+    /**
+     * 执行用时 :38 ms, 在所有 Java 提交中击败了32.63%的用户
+     * 内存消耗 :47.7 MB, 在所有 Java 提交中击败了6.45%的用户
+     * @param T
+     * @return
+     */
     public int[] dailyTemperatures(int[] T) {
         int[] ans = new int[T.length];
         Stack<List<Integer>> stack = new Stack<>();
