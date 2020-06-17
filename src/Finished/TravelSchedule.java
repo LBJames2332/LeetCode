@@ -1,3 +1,5 @@
+package Finished;
+
 public class TravelSchedule {
     /**
      * 执行用时 :4 ms, 在所有 Java 提交中击败了87.77%的用户
@@ -28,7 +30,26 @@ public class TravelSchedule {
 
     }
 
+    /**
+     * 执行用时 :4 ms, 在所有 Java 提交中击败了87.77%的用户
+     * 内存消耗 :48.6 MB, 在所有 Java 提交中击败了100.00%的用户
+     * @param A
+     * @return
+     */
+    public int maxScoreSightseeingPair_2(int[] A) {
+        int len = A.length;
+        int ans=A[0]+A[1]-1;
+        int mx = A[0];
+
+
+        for (int i = 1; i < A.length; i++) {
+            ans = Math.max(ans,mx+A[i]-i);
+            mx  = Math.max(mx,A[i]+i);
+        }
+        return ans;
+
+    }
     public static void main(String[] args) {
-        new TravelSchedule().maxScoreSightseeingPair(new int[]{8,1,5,2,6});
+        System.out.println(new TravelSchedule().maxScoreSightseeingPair_2(new int[]{8,1,5,2,6}));
     }
 }
