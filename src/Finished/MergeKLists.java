@@ -1,5 +1,8 @@
 package Finished;
 
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
 public class MergeKLists {
 
     public static class ListNode {
@@ -24,6 +27,28 @@ public class MergeKLists {
         if(lists.length==0) return null;
         DivideMerge(lists,0,lists.length-1);
         return lists[0];
+    }
+    public ListNode mergeKListsHeap(ListNode[] lists) {
+        ListNode head = new ListNode(1);
+        PriorityQueue<ListNode> nodes = new PriorityQueue<>(lists.length, new Comparator<ListNode>() {
+            @Override
+            public int compare(ListNode o1, ListNode o2) {
+                return o1.val-o2.val;
+            }
+        });
+        for (ListNode node:lists) {
+            if (node!=null) nodes.add(node);
+        }
+        ListNode current;
+        current = nodes.poll();
+        head.next = current;
+        if (current.next!=null) nodes.add(current.next);
+        while (nodes.size()>0){
+            current.next = nodes.poll();
+            current = current.next;
+            if (current.next!=null) nodes.add(current.next);
+        }
+        return head.next;
     }
     public void DivideMerge(ListNode[] lists,int start,int end) {
         if (start==end) return;
@@ -135,7 +160,7 @@ public class MergeKLists {
         listNodes1[6] = root7;
         listNodes1[7] = root8;
         System.out.println(listNodes1.length);
-        ListNode root = mergeKLists.mergeKLists(listNodes1);
+        ListNode root = mergeKLists.mergeKListsHeap(listNodes1);
         while (root!=null){
             System.out.print(root.val+" ");
             root = root.next;
